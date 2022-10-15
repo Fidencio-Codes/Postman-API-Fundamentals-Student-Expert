@@ -1,0 +1,349 @@
+Postman API Fundamentals Student Expert - Notes
+
+Learning objectives
+By the end of this course you will understand:
+
+What APIs are and why they are crucial to modern software development
+How to use Postman to work with APIs
+How to interact with a real-world API 
+How Postman helps you benefit from the power of APIs in your applications
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+Application Programming Interface (API)
+
+Contract allowing code to talk to other code - meaning?
+- they allow for the sharing of resources and services between applications, organizations, and devices. 
+
+used to integrate features and build automations 
+saas - APIs used for service 
+
+components - client, server, api 
+
+REST APIs
+Some traits of REST APIs include not storing session state between requests, the ability to cache, and ability to send and receive various data types.
+
+Types of  API
+Public APIs (aka Open APIs)
+Consumed by anyone who discovers the API
+
+- Private APIs
+Consumed only within an organization and not made public
+
+- Partner APIs
+Consumed between one or more organizations that have an established relationship
+
+- Public REST API will be made in training 
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+POSTMAN - platform used to creating and using APIs
+
+Before postman, cURL commands was used to interact with APIs
+EXAMPLE: curl https://api.github.com/users/postmanlabs
+
+Using Postman Library API v2
+
+Collections are places to organize your API requests in Postman.
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Task 1 - Get books from library API
+
+Name your request "get books". Set the request method to GET, and the request URL to GET https://library-api.postmanlabs.com/books
+
+Response: JSON (JavaScript Object Notation) response body that is an array of book objects
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+HTML request methods (also called HTTP Verbs) - Used to perform CRUD operations
+GET - POST - PATCH/PUT - DELETE (there are others, these are most common)
+
+* PUT usually replaces an entire resource, whereas PATCH usually is for partial updates
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+URL Requests - location where API call is made 
+
+A request URL has three parts: 
+   a protocol (such as http:// or https://) 
+   host (location of the server), 
+   and path (route on the server)
+
+Protocol  |                      Host                         | Path 
+https://    |    library-api.postmanlabs.com     | /books
+
+Paths and complete URLs are called API Endpoints 
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Response Status Code - indicators of whether requests were sent or failed
+
+{Code range	|     Meaning	
+Examples                              }
+
+2xx	Success
+200 - OK
+201 - Created
+204 - No content (silent OK)
+
+3xx	Redirection	
+301 - Moved (path changed)
+
+4xx	Client error	
+400 - Bad request
+401 - Unauthorized
+403 - Not permitted
+404 - Not found
+
+5xx	Server error	
+500 - Internal server error
+502 - Bad gateway
+504 - Gateway timeout
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Request Parameters
+
+Query parameters 
+- they start with a question mark "?" and are followed by key-value pairs 
+- Format: <key>=<value>
+- added to the end of the path 
+
+     Ex. GET https://some-api.com/photos?orientation=landscape
+
+If there are multiple query parameters, each is separated by an ampersand "&."
+ 
+Below, two query parameters to specify the orientation and size of photos to be returned:
+
+GET https://some-api.com/photos?orientation=landscape&size=500x400
+
+Sometimes query parameters are optional and allow you to add filters or extra data to your responses. 
+
+Sometimes they are required in order for the server to process your request. APIs are implemented differently to fulfill different needs.
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+A path parameter 
+(or "path variable") is a dynamic section of a path, and is often used for IDs and entity names such as usernames. 
+
+single path parameters 
+GET https://api.github.com/users/{username}
+GET https://api.github.com/users/fidencio-codes
+GET https://api.github.com/users/postmanlabs
+
+multi-path parameters
+GET https://api.github.com/repos/{owner}/{repoName}
+GET https://api.github.com/repos/postmanlabs/newman
+
+Note that some API documentation uses colon syntax to represent a wildcard in the path, like /users/:username, 
+while some use curly braces like /users/{username}. They both mean the same thing: that part of the path is dynamic!
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Path parameters
+ex: /books/abc123             
+Located directly after a forward slash in the path. Can be anywhere in the path
+Accepts dynamic values
+* Often used for IDs or entity names
+
+VS
+
+Query parameters
+ex: /books?search=borges&checkedOut=false
+Located only at the end of a path, right after a question mark ?
+Accepts defined query keys with potentially dynamic values.
+* Often used for options and filters
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Postman console 
+If you run into any errors when making API calls, always check the Postman Console and make sure the raw request was sent as you expected. 
+   - A common error is adding accidental white space in your query or path parameter values.
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Task: Add an authorization header
+
+Some APIs require Authorization (aka Auth) for certain endpoint in order to permit a request
+
+There are multiple methods for authorizing a request. 
+Some examples are 
+- Basic Auth (username and password), 
+- OAuth (password-less authorization), 
+- and API Keys (secret strings registered to a developer from an API). 
+
+Header name: api-key
+Header value: postmanrulz
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Task: Use Postman Auth
+
+APIs that use API Key auth usually allow developers to sign up in a developer portal, where they will receive a random API Key that can be used to authorize their requests to the API. 
+
+The API Key allows the API to track who is making calls and how often.  
+
+Postman Auth
+All requests inside this collection that use the auth method “Inherit from parent” will have this header attached, and therefore be authorized
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Variables in Postman
+
+Scope = Global 
+                   > Collections 
+                         > Environments
+                                > Data 
+                                       >Local 
+
+Global Variable - Applies to all entites from Collections to Environments to Data  files
+
+Environment Variable - Applies to one or more environments in a collection 
+
+Local Variable - only available to single requests 
+
+Variable Syntax - double curly braces with variable name inside
+{{variableName}}
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Task: Set "baseUrl" variable
+
+
+Variables tab for the Collection has two columns:
+
+Initial Value - the value initially set when someone forks or imports your collection. Note that this is public so don't put any secrets here!
+
+Current Value - Postman always resolves the variable to this value. This is local to your Postman account, and not public. It is good to keep secrets like API Keys ONLY in this column and not include in the Initial Value column.
+
+From Task: 
+Set all your requests to use {{baseUrl}} to replace https://library-api.postmanlabs.com (before the slash /) on your collections 
+
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Setting variables programmatically (scripting)
+> add automations and dynamic behaviors to your collections
+
+Postman uses a helper object named pm, gives you access data about your postman environment, requests, responses, variables and testing utilities
+
+Access JSON response body from API
+pm.reponse.json()
+
+Access collection variables like the value of baseUrl
+pm.collectionVariables.get("baseURL")
+
+ Set variable with 
+pm.collectionVariables.set("variableName", "variableValue") like this:
+     > pm.collectionVariables.set(“myVar”, “foo”)
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Task Your First Script 
+
+Used scripting and the pm object to automatically set a new book's id as a collection variable so we can use the id in other requests.
+
+Node.js is a runtime environment for executing JavaScript code outside of a web browser
+
+***Inside the POST add new book - Tests editor, add this JavaScript code to log the JSON response from the API
+
+console.log(pm.response.json())
+
+Save and run 
+This will create a JSON response from the API that you can check on the console under your latest POST request 
+
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Task: Grab the new book id
+
+Colection variables 
+two parameter: variableName and value
+
+set callection variables using 
+pm.collectionVariables.set("variableName", value)
+
+getc collection using variableName you need
+pm.collectionVariables.get("variableName")
+
+
+Local Variables 
+
+two variable forms 
+
+const - values that are not nullable 
+let - nullable values 
+
+const id = pm.response.json().id
+pm.collectionVariables.set("id", id)
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Task: Checkout your book
+
+Update library database by adding checkOut status for your books
+
+PATCH https://library-api.postmanlabs.com/books/:id
+
+Make sure authorization is inherited automatically from collection 
+
+PATCH Body includes following update (in raw, JSON type)
+
+{ 
+  "checkedOut": true 
+}
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Task: Delete your book
+
+Body stays empty 
+
+Params tab path variable set to {{id}}
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+Code Snippet generator </>
+   > on the right side of the app
+
+Generates the API request in common coding languages like Python, JavaScript, C, NodeJS
+
+cURL cmd generated by code snippet
+curl --location --request GET 'https://library-api.postmanlabs.com/books' \
+--header 'api-key: postmanrulz'
+
+(Use on Bash terminal to get all books in data)
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+// -- local variable notes -- 
+
+// -- const --
+const myVar = "This variable cannot be changed"
+console.log(myVar)
+
+myVar = "foo"
+// -- [ERROR!] Uncaught TypeError: Assignment to constant variable. --
+
+// -- let --
+let myVar2 = "I can change"
+console.log(myVar2)
+
+myVar2 = "See? I changed"
+console.log(myVar2)
+
+
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+What you have learned:
+
+what APIs are
+what Postman is for
+how to build API requests (GET, POST, PATCH, DELETE)
+how to interpret API responses
+how to read API documentation
+how to authorize requests to an API
+how to set variables in Postman for efficiency
+how to automate processes with scripts in Postman
+how to generate API call code snippets for your apps using Postman's codegen feature
